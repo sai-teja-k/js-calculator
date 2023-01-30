@@ -51,8 +51,9 @@ body{
 .screen{
     display: flex;
     flex-direction: column;
-    justify-content:center;
-    align-items:center;
+    justify-content:flex-end;
+    align-items:flex-end;
+    flex:1;
     margin:10px 0;
     height:85px;
     text-align: right;
@@ -60,34 +61,37 @@ body{
     color: white;
     border:2px solid orange;
     box-shadow: none;
-    flex: 1;
 }
 
-.previousScreen,.currentScreen{
-    border: none;
-    box-shadow: none;
-    width:100%;
-    height:40px;
-    background: transparent;
+.previousScreen{
+    font-size: 20px;
+    padding:0 5px;
+    padding-bottom: 5px;
 }
 
-#operator{
+.currentScreen{
+    font-size: 40px;
+    padding:0 5px;
+}
+
+#operator,#clear,#delete{
     color:orange;
 }
 
-#operator:hover{
+#operator:hover,#clear:hover,#delete:hover{
     box-shadow: 0 0 20px rgba(255,140,0,0.9);
 }
 
-.container div .equal{
+.container div #equal{
     width:155px;
+    color: white;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 5s ease-in-out infinite;
 }
 
-.container div .equal:hover{
+.container div #equal:hover{
     border-width: 2px;
-    box-shadow: 0 0 20px rgba(255,140,0,0.9);
+    box-shadow: 0 0 30px rgba(255,140,0,0.9);
     border-color: orange;
 }

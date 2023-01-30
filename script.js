@@ -41,7 +41,7 @@ equal.addEventListener("click", function(){
     
 });
 
-
+del.addEventListener("click",removeNum);
 
 //functions 
 
@@ -82,4 +82,9 @@ function calculate(){
     currentValue ="";
     previousScreen.textContent = "";
     currentScreen.textContent = previousValue;
+}
+
+function removeNum(){
+    currentValue = currentValue.slice(0,-1);
+    currentScreen.textContent = currentValue;
 }

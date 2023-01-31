@@ -1,6 +1,6 @@
 let currentValue = "" ;
 let previousValue = "" ;
-let operator = "" ;
+let operator = undefined ;
 
 let currentScreen = document.querySelector(".currentScreen");
 let previousScreen = document.querySelector(".previousScreen");
@@ -17,12 +17,9 @@ let numbers = document.querySelectorAll("#number");
 
 numbers.forEach((number) => number.addEventListener("click", function(e){
     handleNumber(e.target.textContent);
-    currentScreen.textContent = currentValue;
 }));
 
-decimal.addEventListener("click",function(){
-    addDecimal();
-})
+decimal.addEventListener("click", addDecimal )
 
 operators.forEach((operator) => operator.addEventListener("click" , function(e){
     handleOperator(e.target.textContent);
@@ -31,15 +28,12 @@ operators.forEach((operator) => operator.addEventListener("click" , function(e){
 clear.addEventListener("click" , function(e){
     previousValue = "";
     currentValue = "";
-    operator = "";
+    operator = undefined;
     currentScreen.textContent = "";
     previousScreen.textContent = "";
 })
 
-equal.addEventListener("click", function(){
-    calculate();
-    
-});
+equal.addEventListener("click", calculate );
 
 del.addEventListener("click",removeNum);
 
@@ -47,6 +41,7 @@ del.addEventListener("click",removeNum);
 
 function handleNumber(num){
     if(currentValue.length <= 10) currentValue += num;
+    currentScreen.textContent = currentValue;
 }
 
 function addDecimal(){
@@ -55,9 +50,12 @@ function addDecimal(){
 }
 
 function handleOperator(op){
+    if(currentValue === "") return
+    if(previousValue !== "")
+       calculate()
     operator = op;
     previousValue = currentValue;
-    previousScreen.textContent = previousValue+" "+op;
+    previousScreen.textContent = previousValue+" "+operator+" ";
     currentValue = "";
     currentScreen.textContent = currentValue;
 }
@@ -65,23 +63,26 @@ function handleOperator(op){
 function calculate(){
     previousValue = Number(previousValue);
     currentValue = Number(currentValue);
-    if(operator!=""){
-        if(operator === "+")
-            previousValue += currentValue;
-        else if(operator === "-")
-            previousValue -= currentValue;
-        else if(operator === "*")
-            previousValue *= currentValue;
-        else if(operator === "/")
-            previousValue /= currentValue;
-    }
-    
+
+    if ( isNaN(previousValue) && isNaN(currentValue))
+        return
+    if(operator === "+")
+        previousValue += currentValue;
+    else if(operator === "-")
+        previousValue -= currentValue;
+    else if(operator === "*")
+        previousValue *= currentValue;
+    else if(operator === "/")
+        previousValue /= currentValue;
+
     previousValue = previousValue.toString()
     currentValue = currentValue.toString();
+    operator = undefined;
 
-    currentValue ="";
-    previousScreen.textContent = "";
+    //previousScreen.textContent += currentValue;
     currentScreen.textContent = previousValue;
+
+    currentValue = previousValue;
 }
 
 function removeNum(){

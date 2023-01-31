@@ -40,7 +40,7 @@ del.addEventListener("click",removeNum);
 //functions 
 
 function handleNumber(num){
-    if(currentValue.length <= 10) currentValue += num;
+    if(currentValue.length <= 12) currentValue += num;
     currentScreen.textContent = currentValue;
 }
 
